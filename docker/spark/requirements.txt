@@ -1,0 +1,3 @@
+pyspark
+pandas
+boto3  # For connecting to MinIO (S3 compatible storage)
