@@ -1,0 +1,13 @@
+# health-record-pipeline/spark_config.yml
+spark:
+  app_name: "HealthStream"
+  master: "spark://spark-master:7077"
+  checkpoint_location: "/checkpoint"
+  
+streaming:
+  trigger_interval: "1 minute"
+  watermark_delay: "10 minutes"
+  
+batch:
+  partition_column: "date"
+  num_partitions: 10

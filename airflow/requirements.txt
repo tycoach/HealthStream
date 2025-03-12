@@ -1,0 +1,4 @@
+faker
+tqdm
+minio
+python-dotenv

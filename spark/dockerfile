@@ -1,0 +1,20 @@
+
+# spark/Dockerfile
+FROM bitnami/spark:latest
+
+USER root
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and pre-downloaded dependencies
+COPY ./requirements.txt /requirements.txt
+#COPY ./pip_packages /pip_packages
+
+# Install Python dependencies
+RUN pip install --find-links=/pip_packages -r /requirements.txt --no-cache-dir --timeout=300
+
+# # Copy Spark configurations
+# COPY ./spark-defaults.conf /opt/bitnami/spark/conf/
+
+USER 1001

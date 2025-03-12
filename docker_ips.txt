@@ -1,0 +1,8 @@
+healthstream-airflow-webserver-1 - 
+healthstream-airflow-worker-1 - 
+healthstream-airflow-scheduler-1 - 
+healthstream-airflow-triggerer-1 - 
+healthstream_pgadmin - 
+postgres - 
+healthstream_minio - 
+redis - 
