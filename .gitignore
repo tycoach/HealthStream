@@ -136,7 +136,19 @@ ENV/
 env.bak/
 venv.bak/
 health_stream_env/
-.health_stream_env/
+
+
+# Output data files
+output/
+
+# Logs
+logs/
+
+# Spark packages
+spark/pip_packages/
+
+# Temporary files
+*.temp.*
 
 # Spyder project settings
 .spyderproject
