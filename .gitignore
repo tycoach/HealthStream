@@ -143,6 +143,8 @@ output/
 
 # Logs
 logs/
+airflow\logs/
+log/
 
 # Spark packages
 spark/pip_packages/
