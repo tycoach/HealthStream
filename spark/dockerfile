@@ -5,16 +5,57 @@ FROM bitnami/spark:latest
 USER root
 
 # Set working directory
-WORKDIR /app
+WORKDIR /opt/spark
+
+# Install Java
+#RUN apt-get update && apt-get install -y openjdk-17-jdk
+
+# Check what Java is available
+RUN which java
+RUN java -version
+RUN echo $JAVA_HOME
+RUN find / -name "java" -type f 2>/dev/null | grep bin/java
+
+# # Set Java environment variables
+# ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+# ENV PATH=$JAVA_HOME/bin:$PATH
+
+# # Install system dependencies for Python packages
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Download & Add Hadoop AWS JARs for MinIO/S3 support
+RUN curl --retry 5 --retry-delay 5 --max-time 120 -fsSL -o /opt/bitnami/spark/jars/hadoop-aws-3.3.2.jar https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.2/hadoop-aws-3.3.2.jar && \
+    curl --retry 5 --retry-delay 5 --max-time 120 -fsSL -o /opt/bitnami/spark/jars/aws-java-sdk-bundle-1.11.1026.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.1026/aws-java-sdk-bundle-1.11.1026.jar
+
+    
+# Set Spark & Hadoop Configurations for S3/MinIO
+ENV SPARK_DIST_CLASSPATH="/opt/bitnami/spark/jars/*"
 
 # Copy requirements and pre-downloaded dependencies
 COPY ./requirements.txt /requirements.txt
-#COPY ./pip_packages /pip_packages
-
-# Install Python dependencies
+COPY ./pip_packages /pip_packages
+#Install Python dependencies
 RUN pip install --find-links=/pip_packages -r /requirements.txt --no-cache-dir --timeout=300
+RUN pip install minio
+RUN pip install pandas
+RUN pip install python-dotenv
+#RUN pip install apache-airflow-providers-apache-spark
 
-# # Copy Spark configurations
-# COPY ./spark-defaults.conf /opt/bitnami/spark/conf/
+# # # Copy Spark job scripts
+COPY ./jobs /opt/spark/jobs/
+RUN chmod +x /opt/spark/jobs/*.py
+
+# Set PYTHONPATH
+ENV PYTHONPATH="${PYTHONPATH}:/opt/spark:/opt/spark/generator"
+
+# Set permissions
+RUN chown -R 1001:1001 /opt/spark
+
 
 USER 1001

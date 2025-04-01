@@ -1,0 +1,12 @@
+# health-record-pipeline/config/kafka_config.yml
+bootstrap.servers: broker:29092
+schema.registry.url: http://schema-registry:8081
+topics:
+  health_records: 
+    name: health_records
+    partitions: 3
+    replication_factor: 1
+  daily_health:
+    name: daily_health
+    partitions: 3
+    replication_factor: 1

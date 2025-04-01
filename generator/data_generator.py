@@ -1,5 +1,4 @@
 import pandas as pd
-from faker import Faker
 from .faker_utils import generate_record
 from .schema import get_health_record_schema
 import io

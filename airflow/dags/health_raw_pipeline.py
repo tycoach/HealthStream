@@ -1,25 +1,24 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-#from generator.main import generate_and_stream_to_minio
-import os
 from dotenv import load_dotenv
 import sys
-from pathlib import Path
-from minio import Minio
+# import variables
+from airflow.models import Variable
 
 load_dotenv()
 
 bucket_name = "rogerlake"
-minio_endpoint = os.getenv("MINIO_ENDPOINT", "172.18.0.2:9000")
+minio_endpoint = Variable.get("MINIO_ENDPOINT")
+access_key = Variable.get("MINIO_ACCESS_KEY")
+print(f"Using access", access_key)
+secret_key = Variable.get("MINIO_SECRET")
 print(f"------Connecting to MinIO at: {minio_endpoint}")
 print(f"Using bucket: {bucket_name}")
 
 # Ensure Python can find the 'generator' module
 sys.path.append('/opt/airflow')
 sys.path.append('/opt/airflow/generator')
-
-
 
 
 from generator.main import generate_and_stream_to_minio

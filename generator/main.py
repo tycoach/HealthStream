@@ -1,5 +1,4 @@
 import uuid
-import os
 import pandas as pd
 from datetime import datetime
 from faker import Faker
@@ -10,14 +9,15 @@ from .metadata_manager import create_metadata
 from .schema import get_health_record_schema
 from dotenv import load_dotenv
 import io
+from airflow.models import Variable
 
 load_dotenv()
 
 ##variables
-
-minio_endpoint = os.getenv("MINIO_ENDPOINT", "172.18.0.2:9000")
-access_key = os.getenv("MINIO_ACCESS_KEY")
-secret_key = os.getenv("MINIO_SECRET")
+# MinIO configuration
+minio_endpoint = Variable.get("MINIO_ENDPOINT")
+access_key = Variable.get("MINIO_ACCESS_KEY")
+secret_key = Variable.get("MINIO_SECRET")
 bucket_name = "rogerlake"
 
 
