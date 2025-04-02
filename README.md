@@ -74,14 +74,16 @@ The architecture of the HealthStream project is as follows:
         |                                                       |
         |                                                       |
         v                                                       v
-+-------------------+                                   +-------------------+
-|                   |                                   |                   |
++-------------------+                                   +-------------------+           
+|                   |                                   |                   |           
 |  Workflow Manager |                                   |   Output Storage  |
-|   (Apache Airflow)|                                   |      (MinIO)      |
+|   (Apache Airflow)|                                   |      (MinIO)      | ------- >  POSTGRES DB
 |                   |                                   |                   |
 +-------------------+                                   +-------------------+
 ```
 
+
+                                
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
