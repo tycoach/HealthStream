@@ -44,7 +44,6 @@ parquet_object = "health_records/_cleaned_/health_data_{timestamp}.parquet"
 
 
 
-
 # Default args for the DAG
 default_args = {
     "owner": "airflow",
