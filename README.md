@@ -1,6 +1,6 @@
 # HealthStream
 
-HealthStream is a data engineering project designed to handle data generation, processing, and streaming workflows using tools like Airflow, Spark, Kafka, and MinIO.
+HealthStream is a data engineering project designed to handle data generation and  processing using tools like Airflow, Spark, MinIO and postgres(data warehouse).
 
 ## Table of Contents
 
