@@ -11,17 +11,11 @@ load_dotenv()
 
 
 
-# minio_endpoint = os.getenv("MINIO_ENDPOINT", "172.18.0.2:9000")
-# access_key = os.environ.get('MINIO_ACCESS_KEY')
-# secret_key = os.environ.get('MINIO_SECRET')
-bucket_name = os.environ.get('MINIO_BUCKET_NAME')
-# minio_endpoint = Variable.get("MINIO_ENDPOINT")
-# access_key = Variable.get("MINIO_ACCESS_KEY")
-# secret_key = Variable.get("MINIO_SECRET")
-access_key = "DkqjHf8ugAgcXBzu39PK"
+minio_endpoint = os.getenv("MINIO_ENDPOINT", "172.18.0.2:9000")
+access_key = os.environ.get('MINIO_ACCESS_KEY')
+secret_key = os.environ.get('MINIO_SECRET')
 bucket_name="rogerlake"
-secret_key="Z0IQSAUl0mm1V3JMgOLu7ytCHxGS7ken3IFmjjRc"
-minio_endpoint="172.19.0.2:9000"
+
 
 logging.info(f"MinIO Endpoint: {minio_endpoint}")
 logging.info(f"MinIO Bucket: {bucket_name}")
